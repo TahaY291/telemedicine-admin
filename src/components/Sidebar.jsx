@@ -6,10 +6,10 @@ import { useAuth } from "../context/AuthContext.jsx";
 
 const navItems = [
   { to: "/admin", icon: FiHome, label: "Dashboard" },
+  { to: "/admin/doctor-management", icon: FiUser, label: "Doctors" },
+  { to: "/admin/patient-management", icon: FiFileText, label: "Patients" },
   { to: "/admin/appointments", icon: FiCalendar, label: "Appointments" },
-  { to: "/admin/doctors", icon: FiUser, label: "My Doctors" },
-  { to: "/admin/records", icon: FiFileText, label: "Medical Records" },
-  { to: "/admin/profile", icon: FiUser, label: "Profile" },
+  { to: "/admin/feedback-management", icon: FiUser, label: "Feedback" },
 ];
 
 const Sidebar = () => {

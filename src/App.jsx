@@ -9,7 +9,8 @@ import Login from "./pages/Login";
 import LoadingSpinner from "./components/LoadingSpinner";
 import ChangePassword from "./pages/ChangePassword";
 import VerifyEmail from "./pages/VerifyEmail";
-
+import FeedBackManagement from "./pages/FeedBackManagement";
+import AppointmentMonitoring from "./pages/AppointmentMonitoring";
 
 function App() {
   const { user, loading } = useAuth();
@@ -40,6 +41,8 @@ function App() {
             <Route path="/admin/patient-management" element={<PatientManagement />} />
             <Route path="/admin/change-password" element={<ChangePassword />} />
             <Route path="/admin/verify-email" element={<VerifyEmail />} />
+            <Route path="/admin/appointments" element={<AppointmentMonitoring />} />
+            <Route path="/admin/feedback-management" element={<FeedBackManagement />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
