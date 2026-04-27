@@ -33,7 +33,7 @@ const InfoRow = ({ icon: Icon, label, value }) => {
             </span>
             <div className="flex-1 min-w-0">
                 <p className="text-[11px] text-slate-400 uppercase tracking-wider font-medium">{label}</p>
-                <p className="text-sm text-slate-700 font-medium mt-0.5 break-words">{value}</p>
+                <p className="text-sm text-slate-700 font-medium mt-0.5 break">{value}</p>
             </div>
         </div>
     );

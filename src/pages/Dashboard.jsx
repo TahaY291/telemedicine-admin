@@ -110,7 +110,7 @@ const ActivityItem = ({ item, index }) => {
 const QuickLink = ({ to, icon: Icon, label, desc, color }) => (
   <Link
     to={to}
-    className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-[#274760]/30 hover:bg-[#274760]/[0.03] transition-all duration-150"
+    className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-[#274760]/30 hover:bg-[#274760]/3 transition-all duration-150"
   >
     <span className={`h-9 w-9 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
       <Icon size={15} />
