@@ -424,14 +424,14 @@ const AdminDashboard = () => {
 
           <div className="space-y-2.5">
             <QuickLink
-              to="/admin/doctors"
+              to="/admin/doctor-management"
               icon={FiUserCheck}
               label="Doctor Management"
               desc="Review, approve & manage physicians"
               color="bg-[#274760]/10 text-[#274760]"
             />
             <QuickLink
-              to="/admin/patients"
+              to="/admin/patient-management"
               icon={FiUsers}
               label="Patient Management"
               desc="Browse and manage patient records"

@@ -211,19 +211,14 @@ const filtered = useMemo(() => {
         </div>
 
         {/* Drawer */}
-        {selectedPatient && (
-          <div
-            className="flex-1 min-w-0 rounded-2xl border border-slate-200 bg-white overflow-hidden sticky top-4"
-            style={{ height: "calc(100vh - 140px)" }}
-          >
-            <PatientDrawer
-              patient={selectedPatient}
-              onClose={() => setSelectedPatient(null)}
-              onAction={handleAction}
-              actionLoading={actionLoading}
-            />
-          </div>
-        )}
+       {selectedPatient && (
+        <PatientDrawer
+            patient={selectedPatient}
+            onClose={() => setSelectedPatient(null)}
+            onAction={handleAction}
+            actionLoading={actionLoading}
+        />
+    )}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import ChangePassword from "./pages/ChangePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import FeedBackManagement from "./pages/FeedBackManagement";
 import AppointmentMonitoring from "./pages/AppointmentMonitoring";
+import AdminReports from "./pages/AdminReports";
 
 function App() {
   const { user, loading } = useAuth();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/admin/verify-email" element={<VerifyEmail />} />
             <Route path="/admin/appointments" element={<AppointmentMonitoring />} />
             <Route path="/admin/feedback-management" element={<FeedBackManagement />} />
+            <Route path="/admin/reports" element={<AdminReports />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
