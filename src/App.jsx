@@ -12,8 +12,10 @@ import VerifyEmail from "./pages/VerifyEmail";
 import FeedBackManagement from "./pages/FeedBackManagement";
 import AppointmentMonitoring from "./pages/AppointmentMonitoring";
 import AdminReports from "./pages/AdminReports";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation()
   const { user, loading } = useAuth();
 
   if (loading) return <LoadingSpinner />;
@@ -28,6 +30,17 @@ function App() {
       </Routes>
     );
   }
+
+if (location.pathname === "/") {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={<Navigate to="/admin" replace />}
+      />
+    </Routes>
+  );
+}
 
   // Authenticated: show full app
   return (

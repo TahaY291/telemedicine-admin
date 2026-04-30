@@ -373,7 +373,7 @@ const AdminReports = () => {
                                                             className="w-2.5 h-2.5 rounded-full shrink-0"
                                                             style={{ backgroundColor: PALETTE[i % PALETTE.length] }}
                                                         />
-                                                        <span className="text-slate-500 truncate max-w-[110px]">{d.specialty}</span>
+                                                        <span className="text-slate-500 truncate max-w-27.5">{d.specialty}</span>
                                                     </div>
                                                     <span className="font-bold text-slate-700 ml-2">{d.count}</span>
                                                 </div>

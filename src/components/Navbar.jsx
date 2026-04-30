@@ -89,17 +89,6 @@ const Navbar = () => {
             <span>{today}</span>
           </div>
 
-          <button
-            type="button"
-            className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 hover:border-[#274760]/30 hover:text-[#274760] transition-colors"
-            aria-label="Notifications"
-          >
-            <Link to="/Admin/notifications" className="absolute inset-0" />
-            <FiBell size={16} />
-            <Link/>
-            <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 border-2 border-white" />
-          </button>
-
           <div className="relative" ref={menuRef}>
             <button
               type="button"
@@ -131,13 +120,6 @@ const Navbar = () => {
                   <p className="text-[11px] text-slate-500 truncate">{user?.email}</p>
                 </div>
                 <div className="p-2">
-                  <Link
-                    to="/Admin/profile"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-50"
-                  >
-                    <FiUser className="text-slate-500" /> Profile
-                  </Link>
                   <Link
                     to="/Admin/verify-email"
                     onClick={() => setOpen(false)}

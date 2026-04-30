@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiHome, FiCalendar, FiUser, FiFileText, FiLogOut, FiActivity } from "react-icons/fi";
+import { FiHome, FiCalendar, FiUser, FiFileText, FiLogOut, FiActivity, FiBarChart2 } from "react-icons/fi";
 import api from "../api/axios.js";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -10,6 +10,7 @@ const navItems = [
   { to: "/admin/patient-management", icon: FiFileText, label: "Patients" },
   { to: "/admin/appointments", icon: FiCalendar, label: "Appointments" },
   { to: "/admin/feedback-management", icon: FiUser, label: "Feedback" },
+  { to: "/admin/reports", icon: FiBarChart2, label: "Reports" },
 ];
 
 const Sidebar = () => {
