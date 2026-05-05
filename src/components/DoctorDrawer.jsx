@@ -6,6 +6,7 @@ import {
     FiShield, FiHash, FiCalendar, FiFileText,
 } from "react-icons/fi";
 import api from "../api/axios";
+import { useLightbox } from "../context/LightBoxContext";
 
 /* ── Status badge ── */
 const StatusBadge = ({ status }) => {
@@ -50,6 +51,7 @@ const ImageSection = ({ src, label }) => {
             <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
                 <img
                     src={src}
+                    onClick={()=>src && openLightbox(src)}
                     alt={label}
                     className="w-full object-contain max-h-48"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
@@ -86,6 +88,8 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
     const isPending   = status === "pending";
     const isActive    = status === "active";
     const isBlocked   = status === "blocked";
+
+    const {openLightbox} = useLightbox()
 
     /* ── Lazy stats ── */
     const [docStats, setDocStats]         = useState(null);
@@ -125,7 +129,7 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-[#274760]/10 flex items-center justify-center overflow-hidden shrink-0">
                             {pic && pic !== "default-doctor.png"
-                                ? <img src={pic} alt={name} className="w-full h-full object-cover" />
+                                ? <img src={pic} alt={name} onClick={()=> pic && openLightbox(pic)} className="w-full h-full object-cover" />
                                 : <FiUser size={18} className="text-[#274760]" />
                             }
                         </div>

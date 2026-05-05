@@ -75,8 +75,8 @@ const AdminDoctorManagement = () => {
 
     if (filter !== "All") {
       list = list.filter((d) => {
-        const s = (d.userId.status).toLowerCase();
-        return s === filter.toLowerCase();
+        const s = (d?.userId?.status)?.toLowerCase();
+        return s === filter?.toLowerCase();
       });
     }
 
@@ -92,8 +92,8 @@ const AdminDoctorManagement = () => {
     // Pending always first
     const order = { pending: 0, approved: 1, blocked: 2 };
     list.sort((a, b) => {
-      const sa = (a.userId.status || a.approvalStatus || "").toLowerCase();
-      const sb = (b.userId.status || b.approvalStatus || "").toLowerCase();
+      const sa = (a?.userId?.status || a?.approvalStatus || "")?.toLowerCase();
+      const sb = (b?.userId?.status || b.approvalStatus || "")?.toLowerCase();
       return (order[sa] ?? 9) - (order[sb] ?? 9);
     });
 
@@ -103,9 +103,9 @@ const AdminDoctorManagement = () => {
   /* ── Stats ── */
   const counts = useMemo(() => ({
     all: doctors.length,
-    pending: doctors.filter((d) => (d.userId.status  || "").toLowerCase() === "pending").length,
-    approved: doctors.filter((d) => (d.userId.status || "").toLowerCase() === "active").length,
-    blocked: doctors.filter((d) => (d.userId.status || "").toLowerCase() === "blocked").length,
+    pending: doctors.filter((d) => (d?.userId?.status  || "").toLowerCase() === "pending").length,
+    approved: doctors.filter((d) => (d?.userId?.status || "").toLowerCase() === "active").length,
+    blocked: doctors.filter((d) => (d?.userId?.status || "").toLowerCase() === "blocked").length,
   }), [doctors]);
 
   return (
@@ -229,13 +229,13 @@ const AdminDoctorManagement = () => {
           ) : (
             <>
               {/* Pending section */}
-              {filtered.some((d) => (d.userId.status || "").toLowerCase() === "pending") && (
+              {filtered.some((d) => (d?.userId?.status || "").toLowerCase() === "pending") && (
                 <div className="mb-1">
                   <p className="text-[11px] font-bold text-amber-500 uppercase tracking-widest px-1 mb-2 flex items-center gap-1.5">
                     <FiClock size={11} /> Needs Action
                   </p>
                   {filtered
-                    .filter((d) => (d.userId.status || d.approvalStatus || "").toLowerCase() === "pending")
+                    .filter((d) => (d?.userId?.status || d?.approvalStatus || "").toLowerCase() === "pending")
                     .map((doc) => (
                       <DoctorCard
                         key={doc._id}
@@ -250,15 +250,15 @@ const AdminDoctorManagement = () => {
               )}
 
               {/* Other doctors */}
-              {filtered.some((d) => (d.userId.status || "").toLowerCase() !== "pending") && (
+              {filtered.some((d) => (d?.userId?.status || "").toLowerCase() !== "pending") && (
                 <div>
-                  {filter === "All" && filtered.some((d) => (d.userId.status || "").toLowerCase() === "pending") && (
+                  {filter === "All" && filtered.some((d) => (d?.userId?.status || "").toLowerCase() === "pending") && (
                     <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-1 mb-2">
                       All Doctors
                     </p>
                   )}
                   {filtered
-                    .filter((d) => (d.userId.status).toLowerCase() !== "pending")
+                    .filter((d) => (d?.userId?.status)?.toLowerCase() !== "pending")
                     .map((doc) => (
                       <DoctorCard
                         key={doc._id}

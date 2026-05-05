@@ -4,6 +4,8 @@ import {
   FiCalendar, FiHeart, FiDroplet, FiUser,
   FiAlertCircle,
 } from "react-icons/fi";
+import { useLightbox } from "../context/LightBoxContext";
+
 
 const InfoRow = ({ icon: Icon, label, value }) => {
   if (!value) return null;
@@ -31,27 +33,26 @@ const PatientDrawer = ({ patient, onClose, onAction, actionLoading }) => {
   const gender = patient?.personalInfo?.gender || null;
   const pic = patient?.personalInfo?.profileImage || null;
 
-  // ✅ Bug 4 fixed — calculate age from dob
+
+  const {openLightbox} = useLightbox()
+
   const dobRaw = patient?.personalInfo?.dob || null;
   const age = dobRaw
     ? `${new Date().getFullYear() - new Date(dobRaw).getFullYear()} years`
     : null;
 
-  // ✅ Bug 5 fixed — format dob for display
   const dob = dobRaw
     ? new Date(dobRaw).toLocaleDateString("en-GB", {
       day: "numeric", month: "short", year: "numeric",
     })
     : null;
 
-  // ✅ Bug 6 fixed — no duplicate fallback
   const bloodGroup = patient?.medicalInfo?.bloodGroup || null;
 
   const allergies = Array.isArray(patient?.medicalInfo?.allergies)
     ? patient.medicalInfo.allergies.join(", ")
     : patient?.medicalInfo?.allergies || null;
 
-  // ✅ Bug 3 fixed — chronicDiseases matches schema
   const conditions = Array.isArray(patient?.medicalInfo?.chronicDiseases)
     ? patient.medicalInfo.chronicDiseases.join(", ")
     : patient?.medicalInfo?.chronicDiseases || null;
@@ -89,7 +90,7 @@ const PatientDrawer = ({ patient, onClose, onAction, actionLoading }) => {
           <div className="flex flex-col items-center text-center gap-3 pb-4 border-b border-slate-100">
             <div className="w-20 h-20 rounded-2xl bg-[#274760]/10 flex items-center justify-center overflow-hidden">
               {pic
-                ? <img src={pic} alt={name} className="w-full h-full object-cover" />
+                ? <img src={pic} alt={name} onClick={()=> pic && openLightbox(pic)} className="w-full h-full object-cover" />
                 : <FiUser size={30} className="text-[#274760]" />
               }
             </div>
