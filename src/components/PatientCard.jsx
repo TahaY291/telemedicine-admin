@@ -1,6 +1,4 @@
 import { FiUserX, FiUserCheck, FiEye, FiUser } from "react-icons/fi";
-import { useLightbox } from "../context/LightBoxContext";
-
 
 
  
@@ -23,7 +21,6 @@ const StatusBadge = ({ isActive }) => (
   const pic      = patient?.personalInfo?.profileImage       || patient?.user?.profilePicture || null;
   const meta     = [gender, age ? `${age} yrs` : null].filter(Boolean).join(" · ");
 
-  const { openLightbox } = useLightbox()
  
   return (
     <div
@@ -36,7 +33,7 @@ const StatusBadge = ({ isActive }) => (
       {/* Avatar */}
       <div className="w-10 h-10 rounded-xl bg-[#274760]/10 flex items-center justify-center shrink-0 overflow-hidden">
         {pic
-          ? <img src={pic} alt={name} onClick={()=> pic && openLightbox(pic)} className="w-full h-full object-cover" />
+          ? <img src={pic} alt={name}  className="w-full h-full object-cover" />
           : <FiUser size={16} className="text-[#274760]" />
         }
       </div>

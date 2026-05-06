@@ -13,7 +13,7 @@ const StatusBadge = ({ status }) => {
     const s = (status || "").toLowerCase();
     const map = {
         pending: { label: "Pending", cls: "bg-amber-50 text-amber-600 border-amber-200" },
-        active:  { label: "Active",  cls: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+        active: { label: "Active", cls: "bg-emerald-50 text-emerald-600 border-emerald-200" },
         blocked: { label: "Blocked", cls: "bg-red-50 text-red-500 border-red-200" },
     };
     const { label, cls } = map[s] || { label: status, cls: "bg-slate-50 text-slate-500 border-slate-200" };
@@ -40,8 +40,7 @@ const InfoRow = ({ icon: Icon, label, value }) => {
     );
 };
 
-/* ── Image viewer ── */
-const ImageSection = ({ src, label }) => {
+const ImageSection = ({ src, label, openLightbox }) => {
     if (!src || src === "default-doctor.png") return null;
     return (
         <div>
@@ -51,9 +50,9 @@ const ImageSection = ({ src, label }) => {
             <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
                 <img
                     src={src}
-                    onClick={()=>src && openLightbox(src)}
+                    onClick={() => src && openLightbox(src)}
                     alt={label}
-                    className="w-full object-contain max-h-48"
+                    className="w-full object-contain max-h-48 cursor-pointer"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
             </div>
@@ -62,40 +61,40 @@ const ImageSection = ({ src, label }) => {
 };
 
 const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
-    const status    = (doctor?.userId?.status || "").toLowerCase();
-    const name      = doctor?.userId?.username || "Unknown Doctor";
-    const email     = doctor?.userId?.email    || null;
-    const gender    = doctor?.gender           || null;
-    const city      = doctor?.location?.city   || null;
-    const address   = doctor?.location?.address|| null;
-    const spec      = doctor?.specialization   || null;
-    const exp       = doctor?.experience != null
-                        ? `${doctor.experience} year${doctor.experience !== 1 ? "s" : ""}`
-                        : null;
-    const quals     = doctor?.qualifications   || null;
-    const fee       = doctor?.consultationFee  != null
-                        ? `Rs. ${doctor.consultationFee.toLocaleString()}`
-                        : null;
-    const rating    = doctor?.rating
-                        ? `${doctor.rating} / 5 (${doctor.totalReviews} review${doctor.totalReviews !== 1 ? "s" : ""})`
-                        : null;
-    const consults  = doctor?.numberOfConsultations != null
-                        ? `${doctor.numberOfConsultations}`
-                        : null;
-    const pic         = doctor?.doctorImage      || null;
+    const status = (doctor?.userId?.status || "").toLowerCase();
+    const name = doctor?.userId?.username || "Unknown Doctor";
+    const email = doctor?.userId?.email || null;
+    const gender = doctor?.gender || null;
+    const city = doctor?.location?.city || null;
+    const address = doctor?.location?.address || null;
+    const spec = doctor?.specialization || null;
+    const exp = doctor?.experience != null
+        ? `${doctor.experience} year${doctor.experience !== 1 ? "s" : ""}`
+        : null;
+    const quals = doctor?.qualifications || null;
+    const fee = doctor?.consultationFee != null
+        ? `Rs. ${doctor.consultationFee.toLocaleString()}`
+        : null;
+    const rating = doctor?.rating
+        ? `${doctor.rating} / 5 (${doctor.totalReviews} review${doctor.totalReviews !== 1 ? "s" : ""})`
+        : null;
+    const consults = doctor?.numberOfConsultations != null
+        ? `${doctor.numberOfConsultations}`
+        : null;
+    const pic = doctor?.doctorImage || null;
     const certificate = doctor?.certificateImage || null;
-    const isVerified  = doctor?.isVerified;
-    const isPending   = status === "pending";
-    const isActive    = status === "active";
-    const isBlocked   = status === "blocked";
+    const isVerified = doctor?.isVerified;
+    const isPending = status === "pending";
+    const isActive = status === "active";
+    const isBlocked = status === "blocked";
 
-    const {openLightbox} = useLightbox()
+    const { openLightbox } = useLightbox()
 
     /* ── Lazy stats ── */
-    const [docStats, setDocStats]         = useState(null);
+    const [docStats, setDocStats] = useState(null);
     const [statsLoading, setStatsLoading] = useState(false);
-    const [statsLoaded, setStatsLoaded]   = useState(false);
-    const [statsError, setStatsError]     = useState(null);
+    const [statsLoaded, setStatsLoaded] = useState(false);
+    const [statsError, setStatsError] = useState(null);
 
     const loadStats = async () => {
         if (statsLoaded) return;
@@ -129,7 +128,7 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-[#274760]/10 flex items-center justify-center overflow-hidden shrink-0">
                             {pic && pic !== "default-doctor.png"
-                                ? <img src={pic} alt={name} onClick={()=> pic && openLightbox(pic)} className="w-full h-full object-cover" />
+                                ? <img src={pic} alt={name} onClick={() => pic && openLightbox(pic)} className="w-full h-full object-cover" />
                                 : <FiUser size={18} className="text-[#274760]" />
                             }
                         </div>
@@ -163,16 +162,16 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
                             Contact & Details
                         </p>
                         <div className="grid grid-cols-2 gap-x-4">
-                            <InfoRow icon={FiMail}      label="Email"          value={email}   />
-                            <InfoRow icon={FiUser}      label="Gender"         value={gender}  />
-                            <InfoRow icon={FiMapPin}    label="City"           value={city}    />
-                            <InfoRow icon={FiMapPin}    label="Address"        value={address} />
-                            <InfoRow icon={FiBriefcase} label="Specialization" value={spec}    />
-                            <InfoRow icon={FiClock}     label="Experience"     value={exp}     />
-                            <InfoRow icon={FiAward}     label="Qualifications" value={quals}   />
-                            <InfoRow icon={FiStar}      label="Fee"            value={fee}     />
-                            <InfoRow icon={FiStar}      label="Rating"         value={rating}  />
-                            <InfoRow icon={FiHash}      label="Consultations"  value={consults}/>
+                            <InfoRow icon={FiMail} label="Email" value={email} />
+                            <InfoRow icon={FiUser} label="Gender" value={gender} />
+                            <InfoRow icon={FiMapPin} label="City" value={city} />
+                            <InfoRow icon={FiMapPin} label="Address" value={address} />
+                            <InfoRow icon={FiBriefcase} label="Specialization" value={spec} />
+                            <InfoRow icon={FiClock} label="Experience" value={exp} />
+                            <InfoRow icon={FiAward} label="Qualifications" value={quals} />
+                            <InfoRow icon={FiStar} label="Fee" value={fee} />
+                            <InfoRow icon={FiStar} label="Rating" value={rating} />
+                            <InfoRow icon={FiHash} label="Consultations" value={consults} />
                         </div>
                     </div>
 
@@ -218,14 +217,16 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
                             <>
                                 <div className="grid grid-cols-2 gap-3">
                                     {[
-                                        { label: "Total Appointments",  value: docStats.totalAppointments,     icon: FiCalendar    },
-                                        { label: "Completed",           value: docStats.completedAppointments, icon: FiCheckCircle },
-                                        { label: "Cancellation Rate",   value: docStats.cancellationRate,      icon: FiSlash       },
-                                        { label: "Consultations",       value: docStats.totalConsultations,    icon: FiFileText    },
-                                        { label: "Avg Duration",        value: docStats.avgDuration ?? "—",    icon: FiClock       },
-                                        { label: "Rating",              value: docStats.rating
-                                                                                ? `${docStats.rating} / 5`
-                                                                                : "—",                         icon: FiStar        },
+                                        { label: "Total Appointments", value: docStats.totalAppointments, icon: FiCalendar },
+                                        { label: "Completed", value: docStats.completedAppointments, icon: FiCheckCircle },
+                                        { label: "Cancellation Rate", value: docStats.cancellationRate, icon: FiSlash },
+                                        { label: "Consultations", value: docStats.totalConsultations, icon: FiFileText },
+                                        { label: "Avg Duration", value: docStats.avgDuration ?? "—", icon: FiClock },
+                                        {
+                                            label: "Rating", value: docStats.rating
+                                                ? `${docStats.rating} / 5`
+                                                : "—", icon: FiStar
+                                        },
                                     ].map(({ label, value, icon: Icon }) => (
                                         <div
                                             key={label}
@@ -268,10 +269,11 @@ const DoctorDrawer = ({ doctor, onClose, onAction, actionLoading }) => {
 
                     {/* ── Images ── */}
                     <div className="grid grid-cols-2 gap-4">
-                        <ImageSection src={certificate} label="Certificate" />
+                        <ImageSection src={certificate} label="Certificate" openLightbox={openLightbox} />
                         <ImageSection
                             src={pic && pic !== "default-doctor.png" ? pic : null}
                             label="Profile Photo"
+                            openLightbox={openLightbox}
                         />
                     </div>
 

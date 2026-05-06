@@ -1,5 +1,5 @@
 import { FiCheckCircle, FiSlash, FiEye, FiUser } from "react-icons/fi";
-import { useLightbox } from "../context/LightBoxContext";
+
 
 const StatusBadge = ({ status }) => {
     const s = (status || "").toLowerCase();
@@ -25,7 +25,6 @@ const DoctorCard = ({ doctor, isSelected, onClick, onAction, actionLoading }) =>
     const isPending  = status === "pending";
     const isActive   = status === "active";
     const isBlocked  = status === "blocked";
-    const {openLightbox} = useLightbox()
 
     return (
         <div
@@ -43,7 +42,7 @@ const DoctorCard = ({ doctor, isSelected, onClick, onAction, actionLoading }) =>
                 {/* Avatar */}
                 <div className="w-10 h-10 rounded-xl bg-[#274760]/10 flex items-center justify-center shrink-0 overflow-hidden">
                     {pic
-                        ? <img src={pic} alt={name} onClick={()=> pic && openLightbox(pic)} className="w-full h-full object-cover" />
+                        ? <img src={pic} alt={name}  className="w-full h-full object-cover" />
                         : <FiUser size={16} className="text-[#274760]" />
                     }
                 </div>
