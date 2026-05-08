@@ -107,7 +107,7 @@ const PatientAuth = ({ mode = 'login', forcedRole }) => {
             type="email"
             name="email"
             required
-            placeholder="Email Address"
+            placeholder="mtahayasin07@gmail.com"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#274760] outline-none transition"
             value={formData.email}
             onChange={handleChange}
@@ -117,7 +117,7 @@ const PatientAuth = ({ mode = 'login', forcedRole }) => {
             type="password"
             name="password"
             required
-            placeholder="Password"
+            placeholder="tahay1234"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#274760] outline-none transition"
             value={formData.password}
             onChange={handleChange}
