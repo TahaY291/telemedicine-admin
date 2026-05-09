@@ -93,7 +93,7 @@ const PALETTE = [
 ];
 
 const ChartCard = ({ title, sub, icon: Icon, children, action }) => (
-    <div className="bg-white rounded-2xl border border-slate-200 p-5">
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 max-sm:p-2">
         <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
                 <span className="h-8 w-8 rounded-xl bg-[#274760]/10 text-[#274760] flex items-center justify-center">
@@ -244,17 +244,17 @@ const AdminReports = () => {
     const ExportBtn = ({ onClick, label = "Export CSV" }) => (
         <button
             onClick={onClick}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs font-semibold hover:bg-slate-200 transition-colors"
+            className="flex items-center gap-1.5 max-[400px]:hidden px-3 py-1.5 rounded-lg bg-slate-100 text-slate-500 border border-slate-200 text-xs font-semibold hover:bg-slate-200 transition-colors"
         >
             <FiDownload size={12} /> {label}
         </button>
     );
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 max-sm:px-0 py-6">
 
             {/* ── Header ── */}
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex flex-wrap gap-4 items-center justify-between mb-5">
                 <div>
                     <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Reports & Analytics</h1>
                     <p className="text-sm text-slate-400 mt-0.5">Platform-wide insights and trends</p>
@@ -281,7 +281,7 @@ const AdminReports = () => {
             {error && <ErrorBanner error={error} />}
 
             {/* ── Summary pills ── */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 max-[400px]:grid-cols-1 gap-3 mb-6">
                 {[
                     { label: "Total Doctors",       value: summary.totalDoctors       ?? "—", icon: FiUsers,      bg: "bg-[#274760]/10", color: "text-[#274760]" },
                     { label: "Total Patients",       value: summary.totalPatients      ?? "—", icon: FiActivity,   bg: "bg-blue-50",      color: "text-blue-600"  },

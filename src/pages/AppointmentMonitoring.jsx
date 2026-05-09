@@ -175,10 +175,10 @@ const AppointmentMonitoring = () => {
   const hasActiveFilters = search || filter !== "All" || dateFrom || dateTo;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 max-sm:px-0 py-6">
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-wrap items-center justify-between max-[400px]:justify-center gap-4 mb-5">
         <div>
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Appointments</h1>
           <p className="text-sm text-slate-400 mt-0.5">
@@ -198,7 +198,7 @@ const AppointmentMonitoring = () => {
       {error && <ErrorBanner error={error} />}
 
       {/* ── Summary pills ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 max-[400px]:grid-cols-1 gap-3 mb-5">
         {[
           { label: "Total", value: counts.total, icon: FiCalendar, bg: "bg-[#274760]/10", color: "text-[#274760]" },
           { label: "Pending", value: counts.pending, icon: FiClock, bg: "bg-blue-50", color: "text-blue-600" },
@@ -466,7 +466,7 @@ const AppointmentMonitoring = () => {
 
       {/* ── Pagination ── */}
       {!loading && totalPages > 1 && (
-        <div className="flex items-center justify-between mt-5">
+        <div className="flex flex-wrap items-center justify-between mt-5">
           <p className="text-xs text-slate-400">
             Showing {((page - 1) * PAGE_SIZE) + 1}–{Math.min(page * PAGE_SIZE, filtered.length)} of {filtered.length}
           </p>

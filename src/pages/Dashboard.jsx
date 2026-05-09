@@ -15,6 +15,9 @@ import {
   ArcElement,
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
+import StatCard from "../components/dashboard/StatCard.jsx";
+import  ActivityItem from "../components/dashboard/ActivityItem.jsx";
+import QuickLink  from "../components/dashboard/QuickLink.jsx";
 
 ChartJS.register(
   CategoryScale, LinearScale, BarElement,
@@ -32,96 +35,11 @@ const greeting = () => {
 const todayLabel = now.toLocaleDateString(undefined, {
   weekday: "long", month: "long", day: "numeric",
 });
-const timeAgo = (dateStr) => {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return "just now";
-  if (mins < 60) return `${mins}m ago`;
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return `${hrs}h ago`;
-  return `${Math.floor(hrs / 24)}d ago`;
-};
+
 
 // ─── sub-components ───────────────────────────────────────────────────────────
-const StatCard = ({ icon: Icon, label, value, sub, accent, iconBg, iconColor, delta }) => (
-  <div className={`relative rounded-2xl p-5 border overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
-    accent
-      ? "bg-[#274760] border-[#274760] text-white"
-      : "bg-white border-slate-200 text-slate-800"
-  }`}>
-    {accent && (
-      <div className="absolute -right-4 -top-4 w-24 h-24 rounded-full bg-white/5" />
-    )}
-    <div className="flex items-start justify-between mb-3">
-      <span className={`h-9 w-9 rounded-xl flex items-center justify-center ${
-        accent ? "bg-white/15 text-white" : (iconBg || "bg-[#274760]/10") + " " + (iconColor || "text-[#274760]")
-      }`}>
-        <Icon size={16} />
-      </span>
-      {delta !== undefined && (
-        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-          accent ? "bg-white/20 text-white" : "bg-emerald-50 text-emerald-600"
-        }`}>
-          +{delta}%
-        </span>
-      )}
-    </div>
-    <p className={`text-2xl font-bold tracking-tight ${accent ? "text-white" : "text-slate-800"}`}>
-      {value ?? "—"}
-    </p>
-    <p className={`text-xs font-semibold mt-0.5 ${accent ? "text-white/70" : "text-slate-400"}`}>
-      {label}
-    </p>
-    {sub && (
-      <p className={`text-[11px] mt-1 ${accent ? "text-white/50" : "text-slate-300"}`}>{sub}</p>
-    )}
-  </div>
-);
 
-const ActivityItem = ({ item, index }) => {
-  const isBooking = item.type === "booking";
-  return (
-    <div
-      className="flex items-start gap-3 py-3 border-b border-slate-100 last:border-0 animate-fadein"
-      style={{ animationDelay: `${index * 40}ms` }}
-    >
-      <div className={`mt-0.5 h-8 w-8 rounded-xl flex items-center justify-center shrink-0 ${
-        isBooking ? "bg-blue-50 text-blue-500" : "bg-emerald-50 text-emerald-500"
-      }`}>
-        {isBooking ? <FiCalendar size={13} /> : <FiUserPlus size={13} />}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-xs font-semibold text-slate-700 leading-snug truncate">
-          {item.message || "—"}
-        </p>
-        <p className="text-[11px] text-slate-400 mt-0.5">{timeAgo(item.date)}</p>
-      </div>
-      <span className={`mt-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${
-        isBooking
-          ? "bg-blue-50 text-blue-500 border border-blue-100"
-          : "bg-emerald-50 text-emerald-600 border border-emerald-100"
-      }`}>
-        {isBooking ? "Booking" : "Signup"}
-      </span>
-    </div>
-  );
-};
 
-const QuickLink = ({ to, icon: Icon, label, desc, color }) => (
-  <Link
-    to={to}
-    className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-[#274760]/30 hover:bg-[#274760]/3 transition-all duration-150"
-  >
-    <span className={`h-9 w-9 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
-      <Icon size={15} />
-    </span>
-    <div className="flex-1 min-w-0">
-      <p className="text-sm font-bold text-slate-800">{label}</p>
-      <p className="text-[11px] text-slate-400 truncate">{desc}</p>
-    </div>
-    <FiChevronRight size={14} className="text-slate-300 group-hover:text-[#274760] transition-colors" />
-  </Link>
-);
 
 // ─── main component ───────────────────────────────────────────────────────────
 const AdminDashboard = () => {

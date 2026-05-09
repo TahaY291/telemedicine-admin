@@ -144,10 +144,10 @@ const AdminFeedback = () => {
   const hasActiveFilters = search || ratingFilter !== "All";
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 max-sm:px-0 py-6">
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex max-[400px]:flex-col justify-between max-[400px]:justify-center items-center  mb-5">
         <div>
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Feedback Management</h1>
           <p className="text-sm text-slate-400 mt-0.5">
@@ -167,7 +167,7 @@ const AdminFeedback = () => {
       {error && <ErrorBanner error={error} />}
 
       {/* ── Summary pills ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 max-[400px]:grid-cols-1 gap-3 mb-5">
         {[
           { label: "Total Reviews", value: reviews.length, color: "text-[#274760]", bg: "bg-[#274760]/10" },
           { label: "Overall Rating", value: avgOverall, color: "text-amber-600", bg: "bg-amber-50" },
@@ -192,7 +192,7 @@ const AdminFeedback = () => {
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2.5 px-1">
             Average Rating per Doctor
           </p>
-          <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex flex-wrap gap-2.5 overflow-x-auto pb-1 scrollbar-none">
             {doctorAverages.map((d) => (
               <div
                 key={d.id}
@@ -235,12 +235,12 @@ const AdminFeedback = () => {
           </div>
 
           {/* Rating filter */}
-          <div className="flex gap-1.5 bg-slate-100 rounded-xl p-1 shrink-0">
+          <div className="flex gap-1.5 max-sm:gap-1 bg-slate-100 rounded-xl p-1  shrink-0">
             {["All", "5", "4", "3", "2", "1"].map((r) => (
               <button
                 key={r}
                 onClick={() => { setRatingFilter(r); resetPage(); }}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all
+                className={`px-2.5 max-sm:px-1 py-1.5 rounded-lg text-xs font-semibold transition-all
                                     ${ratingFilter === r
                     ? "bg-white text-[#274760] shadow-sm"
                     : "text-slate-400 hover:text-slate-600"

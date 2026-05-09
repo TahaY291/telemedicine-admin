@@ -93,10 +93,10 @@ const filtered = useMemo(() => {
 }), [patients]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 max-sm:px-0 py-6">
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-wrap items-center justify-between mb-5 max-sm:flex-col">
         <div>
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Patient Management</h1>
           <p className="text-sm text-slate-400 mt-0.5">
@@ -116,7 +116,7 @@ const filtered = useMemo(() => {
       {error && <ErrorBanner error={error} />}
 
       {/* ── Summary Pills ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-2 max-[400px]:grid-cols-1 lg:grid-cols-4 gap-3 mb-5">
         {[
           { label: "Total", value: counts.all, icon: FiUsers, bg: "bg-[#274760]/10", color: "text-[#274760]" },
           { label: "Pending", value: counts.pending, icon: FiClock, bg: "bg-amber-50", color: "text-amber-600" },
@@ -151,7 +151,7 @@ const filtered = useMemo(() => {
             </button>
           )}
         </div>
-        <div className="flex gap-1.5 bg-slate-100 rounded-xl p-1">
+        <div className="flex flex-wrap gap-1.5 bg-slate-100 rounded-xl p-1">
           {FILTERS.map((f) => (
             <button
               key={f}
