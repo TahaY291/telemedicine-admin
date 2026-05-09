@@ -30,7 +30,7 @@ const AdminAuth = ({ mode = 'login' }) => {
 
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1${endpoint}`,
+        `${import.meta.env.VITE_BACKEND_URL}${endpoint}`,
         payload,
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       );
